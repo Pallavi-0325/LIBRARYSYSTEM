@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📚 Digital Library</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <script>
+    // Redirect to login if not logged in
+    const role = localStorage.getItem('role');
+    if (!role) {
+      alert('Access denied. Please log in first.');
+      window.location.href = 'login.html';
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📚 Digital Library</h1>
+      <p>Discover and manage books with backend API integration</p>
+      <button class="btn btn-danger" onclick="logoutUser()" style="position: absolute; top: 20px; right: 20px;">Logout</button>
+    </div>
+
+    <!-- Your existing content would continue here -->
+
+  </div>
+  <script>
+    function logoutUser() {
+      localStorage.clear();
+      alert('You have been logged out.');
+      window.location.href = 'logout.html';
+    }
+  </script>
+</body>
+</html>

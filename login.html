@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Access</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      padding-top: 40px;
+    }
+    .access-container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #5a67d8;
+    }
+    .toggle {
+      text-align: center;
+      margin-top: 15px;
+      color: #333;
+    }
+    .toggle a {
+      color: #667eea;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="access-container">
+    <h2 id="formTitle">Login</h2>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <select id="role">
+      <option value="student">Student</option>
+      <option value="librarian">Librarian</option>
+    </select>
+    <button onclick="handleAuth()" id="authButton">Login</button>
+    <div class="toggle">
+      <span id="toggleText">Don't have an account? <a onclick="toggleForm()">Register</a></span>
+    </div>
+  </div>
+
+  <script>
+    let isLogin = true;
+
+    function toggleForm() {
+      isLogin = !isLogin;
+      document.getElementById('formTitle').textContent = isLogin ? 'Login' : 'Register';
+      document.getElementById('authButton').textContent = isLogin ? 'Login' : 'Register';
+      document.getElementById('toggleText').innerHTML = isLogin
+        ? "Don't have an account? <a onclick=\"toggleForm()\">Register</a>"
+        : "Already have an account? <a onclick=\"toggleForm()\">Login</a>";
+    }
+
+    function handleAuth() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const role = document.getElementById('role').value;
+
+      if (!username || !password) {
+        alert('⚠️ Please fill in all fields.');
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem('users') || '{}');
+
+      if (isLogin) {
+        // Login
+        if (users[username] && users[username].password === password && users[username].role === role) {
+          alert('✅ Login successful!');
+          if (role === 'student') {
+            location.href = 'index.html';
+          } else {
+            location.href = 'librarian.html';
+          }
+        } else {
+          alert('❌ Invalid credentials or role.');
+        }
+      } else {
+        // Register
+        if (users[username]) {
+          alert('❌ Username already exists.');
+        } else {
+          users[username] = { password, role };
+          localStorage.setItem('users', JSON.stringify(users));
+          alert('✅ Registration successful! You can now login.');
+          toggleForm();
+        }
+      }
+    }
+  </script>
+</body>
+</html>

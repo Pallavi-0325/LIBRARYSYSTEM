@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Librarian Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f8ff;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+    main {
+      padding: 20px;
+    }
+    .section {
+      margin-bottom: 20px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 0;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #1a252f;
+    }
+    /* Logout button styling */
+    #logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #e74c3c;
+    }
+    #logout-btn:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Librarian Dashboard</h1>
+    <button id="logout-btn" onclick="location.href='logout.html'">Logout</button>
+  </header>
+  <main>
+    <div class="section">
+      <h2>Manage Books</h2>
+      <button onclick="location.href='add_book.html'">Add New Book</button>
+      <button onclick="location.href='view_books.html'">View All Books</button>
+    </div>
+
+    <div class="section">
+      <h2>Manage Users</h2>
+      <button onclick="location.href='view_users.html'">View All Users</button>
+    </div>
+
+    <div class="section">
+      <h2>Issue/Return Books</h2>
+      <button onclick="location.href='issue_book.html'">Issue Book</button>
+      <button onclick="location.href='return_book.html'">Return Book</button>
+    </div>
+  </main>
+</body>
+</html>
